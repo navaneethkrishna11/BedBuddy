@@ -5,77 +5,228 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/Register Page</title>
     <link rel="shortcut icon" href="images/bedb.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --text-color: #333;
+            --bg-color: #f0f8f0;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #2c8179;
+            min-height: 100vh;
             padding: 20px;
+            perspective: 1000px;
         }
+
         .container {
-            background-color: rgb(83, 116, 101);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            width: 500px;
-            max-height: fit-content;
-            
+            width: 100%;
+            max-width: 800px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
         }
+
+        .container:hover {
+            transform: rotateX(5deg) rotateY(5deg);
+        }
+
         .form-container {
             display: flex;
             width: 200%;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .login-container, .register-container {
             padding: 40px;
             width: 50%;
         }
+
         h2 {
             text-align: center;
-            
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        input {
-            width: 90%;
-            padding: 11px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            width: 50%;
-            padding: 10px;
+
+        .input-group {
             position: relative;
-            left: 90px;
-            background-color: #14613b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            margin-bottom: 30px;
         }
+
+        input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: var(--text-color);
+            border: none;
+            border-bottom: 2px solid #ddd;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-bottom-color: var(--primary-color);
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #999;
+            pointer-events: none;
+            transition: 0.3s ease all;
+        }
+
+        input:focus ~ label,
+        input:valid ~ label {
+            top: -20px;
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        button:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, .5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
         .switch {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
         }
+
         .switch a {
-            color: #0f1113;
+            color: var(--primary-color);
             text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .switch a:hover {
+            color: var(--secondary-color);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container, .register-container {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
     <div class="container">
-        <a href="index.html" style="width: 60px; height:30px; position:relative; left:10px; background:#537562; padding:10px;align-items:center; text-decoration:none;color:white; top:9px;">Back</a>
         <div class="form-container">
-            
             <div class="login-container">
                 <h2>Login</h2>
                 <form>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
+                    <div class="input-group">
+                        <input type="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
                     <button type="submit">Login</button>
                 </form>
                 <div class="switch">
@@ -85,12 +236,30 @@
             <div class="register-container">
                 <h2>Register</h2>
                 <form>
-                    <input type="text" placeholder="Firstname" required>
-                    <input type="text" placeholder="Lastname" required>
-                    <input type="text" maxlength="10" placeholder="Phone" required>
-                    <input type="text" placeholder="Address" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
+                    <div class="input-group">
+                        <input type="text" required>
+                        <label>First Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" required>
+                        <label>Last Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" maxlength="10" required>
+                        <label>Phone</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" required>
+                        <label>Address</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
                     <button type="submit">Register</button>
                 </form>
                 <div class="switch">
@@ -99,17 +268,19 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         const formContainer = document.querySelector('.form-container');
         const toRegister = document.getElementById('toRegister');
         const toLogin = document.getElementById('toLogin');
 
-        toRegister.addEventListener('click', () => {
+        toRegister.addEventListener('click', (e) => {
+            e.preventDefault();
             formContainer.style.transform = 'translateX(-50%)';
         });
 
-        toLogin.addEventListener('click', () => {
+        toLogin.addEventListener('click', (e) => {
+            e.preventDefault();
             formContainer.style.transform = 'translateX(0)';
         });
     </script>
