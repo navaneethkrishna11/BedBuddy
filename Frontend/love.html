@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 25%, #ff7675 50%, #d63031 75%, #c44569 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="%23ff1744" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 16 8, auto;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle Effects */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+        }
+
+        /* Container */
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Text */
+        h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Teddy Bears */
+        .teddy-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .teddy {
+            font-size: 5rem;
+            animation: bounce 2s ease-in-out infinite;
+            filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .teddy:nth-child(1) { animation-delay: 0s; }
+        .teddy:nth-child(2) { animation-delay: 0.2s; }
+        .teddy:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* Flowers */
+        .flowers {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .flower {
+            font-size: 3rem;
+            animation: sway 3s ease-in-out infinite;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .flower:nth-child(1) { animation-delay: 0s; }
+        .flower:nth-child(2) { animation-delay: 0.5s; }
+        .flower:nth-child(3) { animation-delay: 1s; }
+        .flower:nth-child(4) { animation-delay: 1.5s; }
+        .flower:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg) translateX(0); }
+            50% { transform: rotate(5deg) translateX(10px); }
+        }
+
+        /* Interactive Button */
+        .button-container {
+            margin-top: 50px;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        button {
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #d63031 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating hearts background */
+        .heart-bg {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+            animation: float 4s ease-in infinite;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Love message */
+        .love-message {
+            position: fixed;
+            font-size: 1rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            animation: floatUp 2s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.2);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .teddy {
+                font-size: 3rem;
+            }
+            .flower {
+                font-size: 2rem;
+            }
+            .teddy-container {
+                gap: 20px;
+            }
+        }
+
+        /* Sparkle effect */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.2rem;
+            animation: sparkleAnim 0.8s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0) translateY(-50px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💕 I LOVE YOU 💕</h1>
+        <p class="subtitle">You make my heart skip a beat ✨</p>
+        
+        <div class="teddy-container">
+            <span class="teddy">🧸</span>
+            <span class="teddy">❤️</span>
+            <span class="teddy">🧸</span>
+        </div>
+
+        <div class="flowers">
+            <span class="flower">🌹</span>
+            <span class="flower">🌺</span>
+            <span class="flower">🌸</span>
+            <span class="flower">💐</span>
+            <span class="flower">🌷</span>
+        </div>
+
+        <div class="button-container">
+            <button onclick="triggerExplosion()">💕 Blast Love 💕</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts in background
+        function createFloatingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-bg');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+
+        // Create particles on click
+        function createParticle(x, y, text, color) {
+            const particle = document.createElement('div');
+            particle.classList.add('love-message');
+            particle.innerHTML = text;
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.color = color || 'white';
+            document.body.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 2000);
+        }
+
+        // Sparkle effect
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 800);
+        }
+
+        // Blast explosion effect
+        function triggerExplosion() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '🌹', '✨'];
+            const messages = [
+                'You are amazing!',
+                'Forever yours ❤️',
+                'My love for you 💕',
+                'You complete me ✨',
+                'Always & Forever 💖',
+                'I adore you! 💗'
+            ];
+
+            // Create explosion effect
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const angle = (i / 20) * Math.PI * 2;
+                    const distance = 150;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+                    
+                    const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+                    createParticle(x, y, randomHeart);
+                    createSparkle(centerX + (Math.random() - 0.5) * 400, centerY + (Math.random() - 0.5) * 400);
+                }, i * 30);
+            }
+
+            // Random love messages
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+                    const randomX = Math.random() * window.innerWidth;
+                    const randomY = Math.random() * window.innerHeight;
+                    createParticle(randomX, randomY, randomMsg, '#fff');
+                }, i * 200);
+            }
+
+            // Camera shake effect
+            document.body.style.animation = 'none';
+            setTimeout(() => {
+                document.body.style.animation = 'gradientShift 15s ease infinite';
+            }, 10);
+        }
+
+        // Click anywhere for love particles
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                const hearts = ['❤️', '💕', '💖', '💗', '💝'];
+                const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+                createParticle(e.clientX, e.clientY, randomHeart);
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+
+        // Initialize
+        createFloatingHearts();
+
+        // Periodic random love messages
+        setInterval(() => {
+            const messages = ['I love you! 💕', 'You\'re amazing! ✨', 'Forever yours! 💖'];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * (window.innerHeight / 2);
+            createParticle(randomX, randomY, randomMsg);
+        }, 5000);
+
+        // Cursor effect
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.97) {
+                const sparkles = ['✨', '💫', '⭐'];
+                const randomSparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                particle.innerHTML = randomSparkle;
+                particle.style.fontSize = '0.8rem';
+                particle.style.pointerEvents = 'none';
+                particle.style.animation = 'float 2s ease-out forwards';
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 2000);
+            }
+        });
+    </script>
+</body>
+</html>
